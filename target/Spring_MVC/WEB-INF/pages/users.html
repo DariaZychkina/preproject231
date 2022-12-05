@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+    <style>
+        table {
+            border: 1px solid;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid;
+        }
+        th {
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr><th>Id</th><th>Name</th><th>Surname</th><th>Watched Supernatural?</th></tr>
+    <th:block th:each="user : ${users}">
+        <tr><td th:text="${user.getId()}"></td><td th:text="${user.getName()}"></td><td th:text="${user.getSurname()}"></td><td th:text="${user.getPersonWatchedTheSupernatural()}"></td></tr>
+    </th:block>
+</table>
+</body>
+</html>
