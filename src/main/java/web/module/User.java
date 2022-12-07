@@ -35,10 +35,12 @@ public class User {
         return surname;
     }
 
-    public Boolean getPersonWatchedTheSupernatural( ) {
+    public Boolean getPersonWatchedTheSupernatural() {
         return personWatchedTheSupernatural;
     }
-
+    public  void setId(int id) {
+        this.id = id;
+    }
     public void setName(String name) {
         this.name = name;
     }

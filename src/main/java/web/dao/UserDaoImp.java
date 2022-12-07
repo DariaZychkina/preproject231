@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 @Repository
-@Transactional
 public class UserDaoImp implements UserDao {
 
     @PersistenceContext
@@ -21,19 +20,25 @@ public class UserDaoImp implements UserDao {
 
     @Override
     @Transactional
-    public void deleteUser(User user) {
-        entityManager.remove(user);
+    public void deleteUser(int id) {
+       entityManager.remove(getById(id));
+
     }
 
     @Override
     @Transactional
     public void updateUser(User user) {
-        
+        entityManager.merge(user);
     }
 
     @Override
     @Transactional
     public List<User> getUsersList() {
-        return entityManager.createQuery("from User", User.class).getResultList();
+        return entityManager.createQuery("FROM User", User.class).getResultList();
+    }
+
+    @Override
+    public User getById(int id) {
+        return entityManager.find(User.class, id);
     }
 }
