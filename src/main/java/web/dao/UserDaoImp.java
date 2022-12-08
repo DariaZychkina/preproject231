@@ -12,6 +12,7 @@ public class UserDaoImp implements UserDao {
 
     @PersistenceContext
     private EntityManager entityManager;
+    
     @Override
     @Transactional
     public void addUser(User user) {
@@ -31,8 +32,7 @@ public class UserDaoImp implements UserDao {
         entityManager.merge(user);
     }
 
-    @Override
-    @Transactional
+    @Override //@Transactional ставиться для указания, что для работы метода нужно открытое соединение с бд. А здесь я использую запрос к бд....... 
     public List<User> getUsersList() {
         return entityManager.createQuery("FROM User", User.class).getResultList();
     }
