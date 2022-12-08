@@ -20,35 +20,38 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @GetMapping()
     public String getPartOfCarsList(ModelMap model) {
         model.addAttribute("users", userService.getUsersList());
         return "users";
     }
+    
     @GetMapping(value = "/editUser/{id}")
     public String editUser(@PathVariable int id, ModelMap model) {
         model.addAttribute("user", userService.getById(id));
         return "editUser";
     }
+    
     @GetMapping(value = "/addUser")
     public String addUser(ModelMap model) {
         model.addAttribute("user", new User());
         return "addUser";
     }
+    
     @GetMapping(value="/deleteUser/{id}")
     public String deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
         return "redirect:/";
     }
 
-    @RequestMapping(value="/editUser/{getId}", method = RequestMethod.POST)
+    @PostMapping(value="/editUser/{getId}")
     public String saveEditUser(@PathVariable int getId, @ModelAttribute("user") User user){
         user.setId(getId);
         userService.updateUser(user);
         return "redirect:/";
     }
-    @RequestMapping(value="/addUser", method = RequestMethod.POST)
+    
+    @PostMapping(value="/addUser")
     public String saveUser(@ModelAttribute("user") User user){
         userService.addUser(user);
         return "redirect:/";
